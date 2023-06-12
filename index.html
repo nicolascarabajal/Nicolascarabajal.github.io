@@ -1,11 +1,432 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <title>VIDEO</title>
+  <title>Asociación Escuela Cientifica Basilio</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    
+    input[type="file"] {
+      display: block;
+      margin: 10px auto;
+    }
+    
+    img {
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #B19500;
+    }
+    h2 {
+      text-align: center;
+    }
+
+    body {
+      background-image: url("fdpw.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #formulario {
+      color: white;
+    }
+
+    label, select, input, button {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #B19500;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      resize: vertical;
+    }
+
+  </style>
+
+  <script>
+    function mostrarImagen(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+          document.getElementById('imagen').setAttribute('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+
 </head>
 <body>
+  <h1>Censo 2023 Asociación Escuela Científica Basilio</h1>
+  <form id="formulario">
+    <!-- Etiquetas y campos de entrada con margen adicional -->
 
-<video src="video.mp4" width="1080px" controls></video>
+    <h2>Información básica</h2>
+    <br>
 
+    <label for="foto">Fotografia:</label>
+    <input type="file" accept="image/*" onchange="mostrarImagen(this)">
+    <img id="imagen" src="#">
+
+    <label for="nombreCompleto">Nombre completo:</label>
+    <input type="text" id="nombreCompleto" required>
+
+    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+    <input type="date" id="fechaNacimiento" required>
+
+    <label for="sexo">Sexo:</label>
+    <select id="sexo" required>
+      <option value="masculino">Masculino</option>
+      <option value="femenino">Femenino</option>
+      <option value="otro">Otro</option>
+    </select>
+
+    <label for="estado">Estado civil:</label>
+    <select id="estado" required>
+      <option value="Soltero/a">Soltero/a</option>
+      <option value="Casado/a">Casado/a</option>
+      <option value="Divorciado/a">Divorciado/a</option>
+      <option value="eparado/a en proceso judicial">eparado/a en proceso judicial</option>
+      <option value="Viudo/a">Viudo/a</option>
+    </select>
+
+    <label for="cuit">CUIT:</label>
+    <input type="text" id="cuit" required>
+
+    <h2>Ubicacion</h2>
+
+    <label for="nacionalidad">Nacionalidad:</label>
+    <input type="text" id="nacionalidad" required>
+
+    <label for="provincia">Provincia:</label>
+    <input type="text" id="provincia" required>
+
+    <label for="localidad">Localidad:</label>
+    <input type="text" id="localidad" required>
+
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" required>
+
+    <label for="cp">Código postal:</label>
+    <input type="text" id="cp" required>
+
+    <h2>Contacto</h2>
+
+    <label for="email">E-MAIL:</label>
+    <input type="email" id="email" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" required>
+
+    <label for="celular">Celular:</label>
+    <input type="text" id="celular" required>
+
+    <h2>Estudios y trabajo</h2>
+
+    <label for="nivelEducacion">Nivel de educación:</label>
+    <select id="nivelEducacion" required onchange="mostrarFormularioEstudio()">
+      <option value="primaria">Primaria incompleta</option>
+      <option value="primaria">Primaria cursando</option>
+      <option value="primaria">Primaria completa</option>
+      <option value="secundaria">Secundaria incompleta</option>
+      <option value="secundaria">Secundaria cursando</option>
+      <option value="secundaria">Secundaria completa</option>
+      <option value="terciaria">Terciaria cursando</option>
+      <option value="terciaria">Terciaria completa</option>
+      <option value="postgrado">Postgrado cursando</option>
+      <option value="postgrado">Postgrado completa</option>
+    </select>
+
+    <div id="formularioEstudio" style="display: none;">
+      <label for="indiqueEstudio">Indique el estudio o carrera:</label>
+      <input type="text" id="indiqueEstudio" required>
+    </div>
+
+    <!-- Insertar el cuestionario "¿Qué carrera?" -->
+    <div id="cuestionarioCarrera" style="display: none;">
+      <h2>¿Qué carrera?</h2>
+      <label for="carrera">Carrera:</label>
+      <input type="text" id="carrera" required>
+    </div>
+    <!-- Fin del cuestionario "¿Qué carrera?" -->
+
+    <label for="trabaja">Trabaja actualmente:</label>
+    <select id="trabaja" required onchange="mostrarCamposTrabajo()">
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <div id="poseeEmprendimiento" style="display: none;">
+      <label for="emprendimiento">¿Posee un emprendimiento?</label>
+      <select id="emprendimiento" required onchange="mostrarCampoEmprendimiento()">
+        <option value="no">No</option>
+        <option value="si">Sí</option>
+      </select>
+    </div>
+
+    <div id="descripcionEmprendimiento" style="display: none;">
+      <label for="breveSinopsis">Breve descripción del mismo:</label>
+      <input type="text" id="breveSinopsis" required>
+    </div>
+
+    <div id="dondeTrabaja" style="display: none;">
+      <label for="lugarTrabajo">¿Dónde está trabajando actualmente?</label>
+      <input type="text" id="lugarTrabajo" required>
+
+      <label for="trabajoSector">Su trabajo es en el sector:</label>
+      <select id="trabajoSector" required>
+        <option value="publico">Público</option>
+        <option value="privado">Privado</option>
+      </select>
+
+      <div id="esProfesionalDiv" style="display: none;">
+        <label for="esProfesional">¿Es profesional?</label>
+        <select id="esProfesional" required>
+          <option value="no">No</option>
+          <option value="si">Sí</option>
+        </select>
+      </div>
+
+      <div id="poseeCuentaBancariaDiv" style="display: none;">
+        <label for="poseeCuentaBancaria">¿Posee cuenta bancaria?</label>
+        <select id="poseeCuentaBancaria" required>
+          <option value="no">No</option>
+          <option value="si">Sí</option>
+        </select>
+      </div>
+
+      <div id="ingresoMensualDiv" style="display: none;">
+        <label for="ingresoMensual">Ingreso mensual:</label>
+        <input type="number" id="ingresoMensual" required>
+      </div>
+    </div>
+
+    <h2>Amigos y Familiares</h2>
+
+    <label for="familiaresAmigos">Familiares/Amigos dentro de la A.E.C.B:</label>
+    <select id="familiaresAmigos" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <label for="grupoEtnico">¿Pertenece a un grupo étnico o comunidad?</label>
+    <select id="grupoEtnico" required onchange="mostrarCampoGrupoEtnico()">
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <div id="campoGrupoEtnico" style="display: none;">
+      <label for="cualGrupoEtnico">¿Cuál?</label>
+      <input type="text" id="cualGrupoEtnico" required>
+    </div>
+
+    <label for="contenidoInstitucion">¿Se siente contenido dentro de la Institución?</label>
+    <select id="contenidoInstitucion" required>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="sistemaSalud">Sistema de Salud:(Mencione cual tiene)</label>
+    <input type="text" id="sistemaSalud" required>
+
+    <h2>Contacto de Urgencia</h2>
+
+    <label for="nombreCompleto2">Nombre completo:</label>
+    <input type="text" id="nombreCompleto2" required>
+
+    <label for="vinculo">Vinculo:</label>
+    <input type="text" id="vinculo" required>
+
+    <label for="celular2">Celular:</label>
+    <input type="text" id="celular2" required>
+
+    <h2>Conocimientos o/y habilidades</h2>
+
+    <textarea id="Conocimientosy/ohabilidades" name="pregunta2"></textarea>
+
+    <h2>Datos A.E.C.B</h2>
+
+    <label for="fechaAsociacion">Fecha de asociacion:</label>
+    <input type="date" id="fechaAsociacion" required>
+
+    <label for="NumerodeAsociado">Numero de Asociado:</label>
+    <input type="text" id="NumerodeAsociado" required>
+
+    <label for="Escuela">Escuela:</label>
+    <input type="text" id="Escuela" required>
+
+    <label for="Region">Region:</label>
+    <input type="text" id="Region" required>
+
+    <label for="coordinador">¿Es coordinador?</label>
+    <select id="coordinador" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <label for="actualizado">¿Esta actualizado?</label>
+    <select id="actualizado" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <label for="credo">¿Se siente miebro de credo?</label>
+    <select id="credo" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <label for="AECB">¿Estaria dispuesto a donar su tiempo a la A.E.C.B?</label>
+    <select id="AECB" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <label for="economicas">¿Realiza donaciones economicas?</label>
+    <select id="economicas" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <label for="institucional">¿Se siente comodo con el metodo de abono de la cuota institucional?</label>
+    <select id="institucional" required>
+      <option value="no">No</option>
+      <option value="si">Sí</option>
+    </select>
+
+    <h2>¿Que sujerencias o cambios propondrias realizar?</h2>
+
+    <textarea id="Conocimientosy/ohabilidades" name="pregunta2"></textarea>
+
+    <button type="button" onclick="guardarRespuestas()">Enviar respuestas</button>
+  </form>
+
+  <script>
+    // Función para mostrar/ocultar los campos relacionados al trabajo
+    function mostrarCamposTrabajo() {
+      var trabajaSelect = document.getElementById("trabaja");
+      var poseeEmprendimientoDiv = document.getElementById("poseeEmprendimiento");
+      var descripcionEmprendimientoDiv = document.getElementById("descripcionEmprendimiento");
+      var dondeTrabajaDiv = document.getElementById("dondeTrabaja");
+      var esProfesionalDiv = document.getElementById("esProfesionalDiv");
+      var poseeCuentaBancariaDiv = document.getElementById("poseeCuentaBancariaDiv");
+      var ingresoMensualDiv = document.getElementById("ingresoMensualDiv");
+
+      if (trabajaSelect.value === "si") {
+        poseeEmprendimientoDiv.style.display = "block";
+        descripcionEmprendimientoDiv.style.display = "block";
+        dondeTrabajaDiv.style.display = "block";
+        esProfesionalDiv.style.display = "block";
+        poseeCuentaBancariaDiv.style.display = "block";
+        ingresoMensualDiv.style.display = "block";
+      } else {
+        poseeEmprendimientoDiv.style.display = "none";
+        descripcionEmprendimientoDiv.style.display = "none";
+        dondeTrabajaDiv.style.display = "none";
+        esProfesionalDiv.style.display = "none";
+        poseeCuentaBancariaDiv.style.display = "none";
+        ingresoMensualDiv.style.display = "none";
+      }
+    }
+
+    // Función para mostrar/ocultar el campo "¿Posee un emprendimiento?"
+    function mostrarCampoEmprendimiento() {
+      var emprendimientoSelect = document.getElementById("emprendimiento");
+      var descripcionEmprendimientoDiv = document.getElementById("descripcionEmprendimiento");
+
+      if (emprendimientoSelect.value === "si") {
+        descripcionEmprendimientoDiv.style.display = "block";
+      } else {
+        descripcionEmprendimientoDiv.style.display = "none";
+      }
+    }
+
+    // Función para mostrar/ocultar el campo "¿Cuál?"
+    function mostrarCampoGrupoEtnico() {
+      var grupoEtnicoSelect = document.getElementById("grupoEtnico");
+      var campoGrupoEtnicoDiv = document.getElementById("campoGrupoEtnico");
+
+      if (grupoEtnicoSelect.value === "si") {
+        campoGrupoEtnicoDiv.style.display = "block";
+      } else {
+        campoGrupoEtnicoDiv.style.display = "none";
+      }
+    }
+
+    // Función para mostrar/ocultar el formulario de estudios según el nivel seleccionado
+    function mostrarFormularioEstudio() {
+      var nivelEducacionSelect = document.getElementById("nivelEducacion");
+      var formularioEstudioDiv = document.getElementById("formularioEstudio");
+      var cuestionarioCarreraDiv = document.getElementById("cuestionarioCarrera");
+
+      if (
+        nivelEducacionSelect.value === "terciaria" ||
+        nivelEducacionSelect.value === "postgrado"
+      ) {
+        formularioEstudioDiv.style.display = "block";
+      } else {
+        formularioEstudioDiv.style.display = "none";
+      }
+    }
+
+    // Función para guardar las respuestas del formulario
+    function guardarRespuestas() {
+      var nombreCompleto = document.getElementById("nombreCompleto").value;
+      var fechaNacimiento = document.getElementById("fechaNacimiento").value;
+      var sexo = document.getElementById("sexo").value;
+      var cuit = document.getElementById("cuit").value;
+      var nacionalidad = document.getElementById("nacionalidad").value;
+      var provincia = document.getElementById("provincia").value;
+      var localidad = document.getElementById("localidad").value;
+      var direccion = document.getElementById("direccion").value;
+      var cp = document.getElementById("cp").value;
+      var email = document.getElementById("email").value;
+      var telefono = document.getElementById("telefono").value;
+      var celular = document.getElementById("celular").value;
+      var nivelEducacion = document.getElementById("nivelEducacion").value;
+      var indiqueEstudio = document.getElementById("indiqueEstudio").value;
+      var carrera = document.getElementById("carrera").value;
+      var trabaja = document.getElementById("trabaja").value;
+      var emprendimiento = document.getElementById("emprendimiento").value;
+      var breveSinopsis = document.getElementById("breveSinopsis").value;
+      var lugarTrabajo = document.getElementById("lugarTrabajo").value;
+      var trabajoSector = document.getElementById("trabajoSector").value;
+      var esProfesional = document.getElementById("esProfesional").value;
+      var poseeCuentaBancaria = document.getElementById("poseeCuentaBancaria").value;
+      var ingresoMensual = document.getElementById("ingresoMensual").value;
+      var familiaresAmigos = document.getElementById("familiaresAmigos").value;
+      var grupoEtnico = document.getElementById("grupoEtnico").value;
+      var cualGrupoEtnico = document.getElementById("cualGrupoEtnico").value;
+      var contenidoInstitucion = document.getElementById("contenidoInstitucion").value;
+      var sistemaSalud = document.getElementById("sistemaSalud").value;
+
+      // Aquí puedes hacer lo que necesites con las respuestas, como enviarlas a un servidor, almacenarlas en una base de datos, etc.
+    }
+  </script>
 </body>
+
 </html>
